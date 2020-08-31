@@ -16,6 +16,42 @@ public class Duke {
         public void markAsDone(){
             this.isDone = true;
         }
+        public String toString() {
+            return description;
+        }
+    }
+
+    public static class Todo extends Task{
+        public Todo(String description){
+            super(description);
+        }
+        @Override
+        public String toString() {
+            return "[T][" + getStatusIcon() + "] " + super.toString();
+        }
+    }
+    public static class Deadline extends Task{
+        protected String by;
+        public Deadline(String description, String by){
+            super(description);
+            this.by = by;
+        }
+        @Override
+        public String toString() {
+            return "[D][" + getStatusIcon() + "] " + super.toString() + "(by:" + by + ")";
+        }
+    }
+
+    public static class Event extends Task{
+        protected String at;
+        public Event(String description, String at){
+            super(description);
+            this.at = at;
+        }
+        @Override
+        public String toString() {
+            return "[E][" + getStatusIcon() + "] " + super.toString() + "(at:" + at + ")";
+        }
     }
 
     public static void main(String[] args) {
@@ -39,7 +75,8 @@ public class Duke {
             else if (input.equals("list")){
                 System.out.println("Here are the tasks in your list:");
                 for(int i = 0; i<itemsCount; i++){
-                    System.out.println(i+1 + ".["+ items[i].getStatusIcon() +"] "+ items[i].description);
+//                    System.out.println(i+1 + ".["+ items[i].getStatusIcon() +"] "+ items[i].description);
+                    System.out.println(String.valueOf(i+1) + ". " + items[i]);
                 }
                 input = in.nextLine();
             }
@@ -51,10 +88,33 @@ public class Duke {
                 input = in.nextLine();
             }
             else {
-                Task t = new Task(input);
-                items[itemsCount] = t;
+                if (input.contains("todo")){
+                    input = input.replace("todo ","");
+                    Todo t = new Todo(input);
+                    items[itemsCount] = t;
+                }
+                else if (input.contains("deadline")){
+                    int indexDivider = input.indexOf("/by");
+                    String dueDate = input.substring(indexDivider+3);
+                    input = input.substring(0,indexDivider).replace("deadline ", "");
+                    Deadline t = new Deadline(input, dueDate);
+                    items[itemsCount] = t;
+                }
+                else if (input.contains("event")){
+                    int indexDivider = input.indexOf("/at");
+                    String eventTime = input.substring(indexDivider+3);
+                    input = input.substring(0,indexDivider).replace("event ", "");
+                    Event t = new Event(input, eventTime);
+                    items[itemsCount] = t;
+                }
+                else{
+                    System.out.println("Invalid command");
+                    input = in.nextLine();
+                    continue;
+                }
                 itemsCount++;
-                System.out.println("added: "+ input);
+                System.out.println("Got it. I've added this task:\n"+ input);
+                System.out.println("You now have " + itemsCount + " task(s) in the list.");
                 input = in.nextLine();
             }
         }
