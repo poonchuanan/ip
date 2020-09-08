@@ -1,60 +1,6 @@
 import java.util.Scanner;
 
 public class Duke {
-    public static class Task {
-        protected String description;
-        protected boolean isDone;
-
-        public Task(String description) {
-            this.description = description;
-            this.isDone = false;
-        }
-
-        public String getStatusIcon() {
-            return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
-        }
-        public void markAsDone(){
-            this.isDone = true;
-        }
-        public String toString() {
-            return description;
-        }
-    }
-
-    public static class Todo extends Task{
-        public Todo(String description){
-            super(description);
-        }
-        @Override
-        public String toString() {
-            return "[T][" + getStatusIcon() + "] " + super.toString();
-        }
-    }
-
-    public static class Deadline extends Task{
-        protected String by;
-        public Deadline(String description, String by){
-            super(description);
-            this.by = by;
-        }
-        @Override
-        public String toString() {
-            return "[D][" + getStatusIcon() + "] " + super.toString() + "(by:" + by + ")";
-        }
-    }
-
-    public static class Event extends Task{
-        protected String at;
-        public Event(String description, String at){
-            super(description);
-            this.at = at;
-        }
-        @Override
-        public String toString() {
-            return "[E][" + getStatusIcon() + "] " + super.toString() + "(at:" + at + ")";
-        }
-    }
-
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         String logo = " ____        _        \n"
