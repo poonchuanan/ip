@@ -19,7 +19,7 @@ public class Duke {
             return false;
         }
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
         Scanner in = new Scanner(System.in);
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -47,11 +47,19 @@ public class Duke {
                 }
                 input = in.nextLine();
             } else if (input.contains("done")){
-                int taskNumber = Integer.parseInt(input.replaceAll("[^0-9]", ""));
-                items[taskNumber-1].markAsDone();
-                System.out.println("Nice! I've marked this task as done:");
-                System.out.println("[" + items[taskNumber-1].getStatusIcon()+ "] " + items[taskNumber-1].description);
-                input = in.nextLine();
+                try {
+                    int taskNumber = Integer.parseInt(input.replaceAll("[^0-9]", ""));
+                    items[taskNumber - 1].markAsDone();
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println("[" + items[taskNumber - 1].getStatusIcon() + "] " + items[taskNumber - 1].description);
+                    input = in.nextLine();
+                } catch (NumberFormatException e){
+                    System.out.println("Task number cannot be empty");
+                    input = in.nextLine();
+                } catch (NullPointerException e){
+                    System.out.println("Please input a valid number");
+                    input = in.nextLine();
+                }
             } else {
 //                String [] wordArray = input.trim().split(" ");
                 if (input.contains("todo")){
