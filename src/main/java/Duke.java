@@ -1,6 +1,24 @@
 import java.util.Scanner;
 
 public class Duke {
+    public static final int MAX_TASKS = 100;
+
+    public static String getFirstWord(String word){
+        String firstWord = word;
+        if (firstWord.contains(" ")) {
+            firstWord = firstWord.substring(0, firstWord.indexOf(" "));
+        }
+        return firstWord;
+    }
+
+    public static boolean checkOneWord(String word){
+        String [] wordArray = word.trim().split(" ");
+        if(wordArray.length == 1){
+            return true;
+        } else{
+            return false;
+        }
+    }
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         String logo = " ____        _        \n"
@@ -11,10 +29,13 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?\n");
-        Task[] items = new Task[100];
+        Task[] items = new Task[MAX_TASKS];
         int itemsCount = 0;
         String input = in.nextLine();
+//        String firstWord = getFirstWord(input);
         while (true) {
+//            String firstWord = getFirstWord(input);
+//            System.out.println(firstWord);
             if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
@@ -32,11 +53,18 @@ public class Duke {
                 System.out.println("[" + items[taskNumber-1].getStatusIcon()+ "] " + items[taskNumber-1].description);
                 input = in.nextLine();
             } else {
+//                String [] wordArray = input.trim().split(" ");
                 if (input.contains("todo")){
-                    input = input.replace("todo ","");
-                    Todo t = new Todo(input);
-                    items[itemsCount] = t;
-                    System.out.println("Got it. I've added this task:\n"+ t);
+                    if (checkOneWord(input)){
+                        System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+                        input = in.nextLine();
+                        continue;
+                    } else {
+                        input = input.replace("todo ", "");
+                        Todo t = new Todo(input);
+                        items[itemsCount] = t;
+                        System.out.println("Got it. I've added this task:\n" + t);
+                    }
                 } else if (input.contains("deadline")){
                     int indexDivider = input.indexOf("/by");
                     String dueDate = input.substring(indexDivider+3);
@@ -52,7 +80,7 @@ public class Duke {
                     items[itemsCount] = t;
                     System.out.println("Got it. I've added this task:\n"+ t);
                 } else{
-                    System.out.println("Invalid command");
+                    System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     input = in.nextLine();
                     continue;
                 }
