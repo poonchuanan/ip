@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Duke {
     public static final int MAX_TASKS = 100;
@@ -41,26 +42,38 @@ public class Duke {
         } catch(FileNotFoundException e){
             Save.createFile();
         }
+        ArrayList<Task> items = new ArrayList<>();
         while (true) {
-//            String firstWord = getFirstWord(input);
-//            System.out.println(firstWord);
             if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             } else if (input.equals("list")){
                 System.out.println("Here are the tasks in your list:");
-                for(int i = 0; i<itemsCount; i++){
-//                    System.out.println(i+1 + ".["+ items[i].getStatusIcon() +"] "+ items[i].description);
-                    System.out.println(String.valueOf(i+1) + ". " + items[i]);
+                for(Task t:items){
+                    System.out.println(String.valueOf(items.indexOf(t)+1) + ". " + t); //index starts from 0
                 }
-                input = in.nextLine();
+            input = in.nextLine();
             } else if (input.contains("done")){
                 try {
                     int taskNumber = Integer.parseInt(input.replaceAll("[^0-9]", ""));
-                    items[taskNumber - 1].markAsDone();
+                    items.get(taskNumber - 1).markAsDone();
                     System.out.println("Nice! I've marked this task as done:");
-                    System.out.println("[" + items[taskNumber - 1].getStatusIcon() + "] " + items[taskNumber - 1].description);
                     Save.saveData();
+                    System.out.println("[" + items.get(taskNumber - 1).getStatusIcon() + "] " + items.get(taskNumber - 1).description);
+                    input = in.nextLine();
+                } catch (NumberFormatException e){
+                    System.out.println("Task number cannot be empty");
+                    input = in.nextLine();
+                } catch (NullPointerException e){
+                    System.out.println("Please input a valid number");
+                    input = in.nextLine();
+                }
+            } else if (input.contains("delete")){
+                try {
+                    int taskNumber = Integer.parseInt(input.replaceAll("[^0-9]", ""));
+
+                    System.out.println("Noted. I've removed this task: " + items.get(taskNumber - 1));
+                    items.remove(items.get(taskNumber - 1));
                     input = in.nextLine();
                 } catch (NumberFormatException e){
                     System.out.println("Task number cannot be empty");
@@ -79,7 +92,8 @@ public class Duke {
                     } else {
                         input = input.replace("todo ", "");
                         Todo t = new Todo(input);
-                        items[itemsCount] = t;
+//                        items[itemsCount] = t;
+                        items.add(t);
                         System.out.println("Got it. I've added this task:\n" + t);
                     }
                 } else if (input.contains("deadline")){
@@ -87,14 +101,14 @@ public class Duke {
                     String dueDate = input.substring(indexDivider+3);
                     input = input.substring(0,indexDivider).replace("deadline ", "");
                     Deadline t = new Deadline(input, dueDate);
-                    items[itemsCount] = t;
+                    items.add(t);
                     System.out.println("Got it. I've added this task:\n"+ t);
                 } else if (input.contains("event")){
                     int indexDivider = input.indexOf("/at");
                     String eventTime = input.substring(indexDivider+3);
                     input = input.substring(0,indexDivider).replace("event ", "");
                     Event t = new Event(input, eventTime);
-                    items[itemsCount] = t;
+                    items.add(t);
                     System.out.println("Got it. I've added this task:\n"+ t);
                 } else{
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -103,7 +117,7 @@ public class Duke {
                 }
                 itemsCount++;
                 Save.saveData();
-                System.out.println("Now you have " + itemsCount + " task(s) in the list.");
+                System.out.println("Now you have " + items.size() + " task(s) in the list.");
                 input = in.nextLine();
             }
         }
