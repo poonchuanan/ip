@@ -1,8 +1,12 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Duke {
     public static final int MAX_TASKS = 100;
+    public static Task[] items = new Task[MAX_TASKS];
+    public static int itemsCount = 0;
 
     public static String getFirstWord(String word){
         String firstWord = word;
@@ -20,7 +24,8 @@ public class Duke {
             return false;
         }
     }
-    public static void main(String[] args) throws DukeException {
+
+    public static void main(String[] args) throws DukeException, IOException {
         Scanner in = new Scanner(System.in);
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -30,8 +35,14 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?\n");
-        ArrayList<Task> items = new ArrayList<>();
         String input = in.nextLine();
+//        String firstWord = getFirstWord(input);
+        try {
+            Save.loadData();
+        } catch(FileNotFoundException e){
+            Save.createFile();
+        }
+        ArrayList<Task> items = new ArrayList<>();
         while (true) {
             if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
@@ -47,8 +58,8 @@ public class Duke {
                     int taskNumber = Integer.parseInt(input.replaceAll("[^0-9]", ""));
                     items.get(taskNumber - 1).markAsDone();
                     System.out.println("Nice! I've marked this task as done:");
+                    Save.saveData();
                     System.out.println("[" + items.get(taskNumber - 1).getStatusIcon() + "] " + items.get(taskNumber - 1).description);
-
                     input = in.nextLine();
                 } catch (NumberFormatException e){
                     System.out.println("Task number cannot be empty");
@@ -104,6 +115,8 @@ public class Duke {
                     input = in.nextLine();
                     continue;
                 }
+                itemsCount++;
+                Save.saveData();
                 System.out.println("Now you have " + items.size() + " task(s) in the list.");
                 input = in.nextLine();
             }
