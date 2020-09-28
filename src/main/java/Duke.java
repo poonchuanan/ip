@@ -1,7 +1,11 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
     public static final int MAX_TASKS = 100;
+    public static Task[] items = new Task[MAX_TASKS];
+    public static int itemsCount = 0;
 
     public static String getFirstWord(String word){
         String firstWord = word;
@@ -19,7 +23,8 @@ public class Duke {
             return false;
         }
     }
-    public static void main(String[] args) throws DukeException {
+
+    public static void main(String[] args) throws DukeException, IOException {
         Scanner in = new Scanner(System.in);
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -29,10 +34,13 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("Hello! I'm Duke");
         System.out.println("What can I do for you?\n");
-        Task[] items = new Task[MAX_TASKS];
-        int itemsCount = 0;
         String input = in.nextLine();
 //        String firstWord = getFirstWord(input);
+        try {
+            Save.loadData();
+        } catch(FileNotFoundException e){
+            Save.createFile();
+        }
         while (true) {
 //            String firstWord = getFirstWord(input);
 //            System.out.println(firstWord);
@@ -52,6 +60,7 @@ public class Duke {
                     items[taskNumber - 1].markAsDone();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println("[" + items[taskNumber - 1].getStatusIcon() + "] " + items[taskNumber - 1].description);
+                    Save.saveData();
                     input = in.nextLine();
                 } catch (NumberFormatException e){
                     System.out.println("Task number cannot be empty");
@@ -93,6 +102,7 @@ public class Duke {
                     continue;
                 }
                 itemsCount++;
+                Save.saveData();
                 System.out.println("Now you have " + itemsCount + " task(s) in the list.");
                 input = in.nextLine();
             }
