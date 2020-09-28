@@ -64,14 +64,10 @@ public class Save {
         writeToFile(itemsPath, textToAdd);
     }
 
-
     private static void writeToFile(String filePath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
     }
 
-    private static void loadToArraylist(){
-
-    }
 }
