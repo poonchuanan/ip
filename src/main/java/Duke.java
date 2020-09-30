@@ -82,6 +82,21 @@ public class Duke {
                     System.out.println("Please input a valid number");
                     input = in.nextLine();
                 }
+            } else if (input.contains("find")) {
+                String searchWord = input.replace("find ","");
+                boolean hasResults = false;
+                System.out.println("Here are the matching tasks in your list:");
+                for (Task t : items) {
+                    if (t.description.contains(searchWord)) {
+                        System.out.println(String.valueOf(items.indexOf(t)+1) + ". " + t);
+                        hasResults = true;
+                    }
+                }
+                if(hasResults == false){
+                    System.out.println("No matches found!");
+                }
+
+                input = in.nextLine();
             } else {
 //                String [] wordArray = input.trim().split(" ");
                 if (input.contains("todo")){
