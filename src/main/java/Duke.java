@@ -3,6 +3,9 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
+/**
+ * Represents main program of Duke
+ */
 public class Duke {
     public static final int MAX_TASKS = 100;
     public static Task[] items = new Task[MAX_TASKS];
@@ -15,12 +18,16 @@ public class Duke {
         }
         return firstWord;
     }
-
+    /**
+     * Checks if string passed is of single word
+     * @param word string to be passed.
+     * @return true If wordArray.length == 1
+     */
     public static boolean checkOneWord(String word){
         String [] wordArray = word.trim().split(" ");
         if(wordArray.length == 1){
             return true;
-        } else{
+        } else {
             return false;
         }
     }
