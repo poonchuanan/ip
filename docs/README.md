@@ -24,7 +24,7 @@ Duke is an application that keeps track of your completion of daily tasks such a
 
 ## Features 
 
-### Adding a Todo task: ``` todo ``` 
+## Adding a Todo task: ``` todo ``` 
 This command adds a todo task to the tasklist.
 
 Format: ```todo DESCRIPTION_OF_TASK```
@@ -147,8 +147,8 @@ Bye. Hope to see you again soon!
 - ✘: Task is not completed
 
 ## Command Summary
-|Command  |Syntax and Examples       |
-|---------|--------------------------|
+|Command|Syntax and Examples|
+|-------|-------------------|
 |todo| `todo DESCRIPTION_OF_TASK` <br> Example: `todo read book`|
 |deadline|`deadline DESCRIPTION_OF_TASK /by TASK_DATE` <br> Example: `deadline submit homework /by tmr`|
 |event|`event DESCRIPTION_OF_TASK /at TASK_DATE` <br> Example: `event play basketball /at wed night`|
