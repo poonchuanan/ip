@@ -147,6 +147,7 @@ Bye. Hope to see you again soon!
 - ✘: Task is not completed
 
 ## Command Summary
+
 |Command|Syntax and Examples|
 |-------|-------------------|
 |todo| `todo DESCRIPTION_OF_TASK` <br> Example: `todo read book`|
