@@ -8,7 +8,8 @@ import java.util.ArrayList;
  */
 public class Duke {
     public static final int MAX_TASKS = 100;
-    public static Task[] items = new Task[MAX_TASKS];
+//    public static Task[] items = new Task[MAX_TASKS];
+    public static ArrayList<Task> items = new ArrayList<>();
     public static int itemsCount = 0;
 
     public static String getFirstWord(String word){
@@ -49,7 +50,7 @@ public class Duke {
         } catch(FileNotFoundException e){
             Save.createFile();
         }
-        ArrayList<Task> items = new ArrayList<>();
+        //ArrayList<Task> items = new ArrayList<>();
         while (true) {
             if (input.equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");

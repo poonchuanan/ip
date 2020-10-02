@@ -41,25 +41,29 @@ public class Save {
             switch (eventType) {
             case "T":
                 Todo t = new Todo(description);
-                Duke.items[Duke.itemsCount] = t;
+                //Duke.items[Duke.itemsCount] = t;
+                Duke.items.add(t);
                 break;
             case "E":
                 int indexDividerEvent = description.indexOf("(at:");
                 String eventTime = description.substring(indexDividerEvent+4).replace(")","");
                 description = description.substring(0,indexDividerEvent);
                 Event e = new Event(description, eventTime);
-                Duke.items[Duke.itemsCount] = e;
+                //Duke.items[Duke.itemsCount] = e;
+                Duke.items.add(e);
                 break;
             case "D":
                 int indexDividerDeadline = description.indexOf("(by:");
                 String deadline = description.substring(indexDividerDeadline+4).replace(")","");
                 description = description.substring(0,indexDividerDeadline);
                 Deadline d = new Deadline(description, deadline);
-                Duke.items[Duke.itemsCount] = d;
+                //Duke.items[Duke.itemsCount] = d;
+                Duke.items.add(d);
                 break;
             }
             if (symbol.equals("\u2713")) {
-                Duke.items[Duke.itemsCount].markAsDone();
+                //Duke.items[Duke.itemsCount].markAsDone();
+                Duke.items.get(Duke.items.size()-1).markAsDone();
             }
             Duke.itemsCount++;
         }
