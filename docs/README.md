@@ -141,6 +141,7 @@ Bye. Hope to see you again soon!
 - T: Represents a Todo task
 - D: Represents a Deadline task 
 - E: Represents an Event task
+
 ### Task completion legend
 - ✓: Task is done
 - ✘: Task is not completed
@@ -149,7 +150,7 @@ Bye. Hope to see you again soon!
 |Command  |Syntax and Examples       |
 |---------|--------------------------|
 |todo| `todo DESCRIPTION_OF_TASK` <br> Example: `todo read book`|
-|deadline|`deadline DESCRIPTION_OF_TASK /by TASK_DATE` <br> Example: `deadline submit homework /by 5pm`|
+|deadline|`deadline DESCRIPTION_OF_TASK /by TASK_DATE` <br> Example: `deadline submit homework /by tmr`|
 |event|`event DESCRIPTION_OF_TASK /at TASK_DATE` <br> Example: `event play basketball /at wed night`|
 |list|`list`|
 |done|`done TASK_NUMBER` <br> Example: `done 1`|
