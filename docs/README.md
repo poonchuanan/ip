@@ -47,7 +47,7 @@ Example of usage: ```deadline submit homework /by 5pm```
 Example outcome:
 ```
 Got it. I've added this task: 
-	[D][✘]  submit homework (by: 5pm)
+[D][✘]  submit homework (by: 5pm)
 Now you have 2 task(s) in the list.
 ```
 ## Adding an Event task: ``` event ```
@@ -60,7 +60,7 @@ Example of usage: ```event play basketball /at wed night```
 Example outcome:
 ```
 Got it. I've added this task: 
-	[E][✘]  play basketball (at: wed night)
+[E][✘]  play basketball (at: wed night)
 Now you have 3 tasks in the list.
 ```
 ## Listing of all tasks: ``` list ```
