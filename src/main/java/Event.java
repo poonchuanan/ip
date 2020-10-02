@@ -4,7 +4,7 @@ public class Event extends Task{
     /**
      * Represents the properties of Event task.
      */
-    public Event(String description, String at){
+    public Event(String description, String at) {
         super(description);
         this.at = at;
     }

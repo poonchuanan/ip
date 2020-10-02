@@ -21,8 +21,10 @@ public class Save {
      */
     public static void createFile() throws IOException {
         File folder = new File("data");
-        folder.mkdir(); // create a folder in your current work space
-        File file = new File(folder, "duke.txt"); // put the file inside the folder
+        // create a folder in your current work space
+        folder.mkdir();
+        // put the file inside the folder
+        File file = new File(folder, "duke.txt");
         file.createNewFile(); // create the file
     }
 
@@ -31,8 +33,10 @@ public class Save {
      * @throws FileNotFoundException If file does not exist in the first place.
      */
     public static void loadData() throws FileNotFoundException {
-        File f = new File(itemsPath); // create a File for the given file path
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        // create a File for the given file path
+        File f = new File(itemsPath);
+        // create a Scanner using the File as the source
+        Scanner s = new Scanner(f);
         while (s.hasNext()) {
             String line = s.nextLine();
             String eventType = line.substring(1, 2);
@@ -41,7 +45,6 @@ public class Save {
             switch (eventType) {
             case "T":
                 Todo t = new Todo(description);
-                //Duke.items[Duke.itemsCount] = t;
                 Duke.items.add(t);
                 break;
             case "E":
@@ -49,7 +52,6 @@ public class Save {
                 String eventTime = description.substring(indexDividerEvent+4).replace(")","");
                 description = description.substring(0,indexDividerEvent);
                 Event e = new Event(description, eventTime);
-                //Duke.items[Duke.itemsCount] = e;
                 Duke.items.add(e);
                 break;
             case "D":
@@ -57,12 +59,10 @@ public class Save {
                 String deadline = description.substring(indexDividerDeadline+4).replace(")","");
                 description = description.substring(0,indexDividerDeadline);
                 Deadline d = new Deadline(description, deadline);
-                //Duke.items[Duke.itemsCount] = d;
                 Duke.items.add(d);
                 break;
             }
             if (symbol.equals("\u2713")) {
-                //Duke.items[Duke.itemsCount].markAsDone();
                 Duke.items.get(Duke.items.size()-1).markAsDone();
             }
             Duke.itemsCount++;

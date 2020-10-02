@@ -1,7 +1,7 @@
 /**
  * Represents the properties of Todo task.
  */
-public class Todo extends Task{
+public class Todo extends Task {
     /**
      * Stores details of Todo
      * @param description description of task
