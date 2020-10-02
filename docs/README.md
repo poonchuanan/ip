@@ -34,7 +34,7 @@ Example of usage: ```todo read book```
 Example outcome:
 ```
 Got it. I've added this task: 
-	[T][✘]  read book
+[T][✘]  read book
 Now you have 1 task(s) in the list.
 ```
 ## Adding a Deadline task: ``` deadline ```
@@ -99,8 +99,7 @@ Example of usage: ```delete 1```
 
 Example outcome:
 ```
-Noted. I've removed this task: 
-	[T][✘]  read book
+Noted. I've removed this task: [T][✘]  read book
 Now you have 2 task(s) in the list.
 ```
 
@@ -120,7 +119,7 @@ Here are the matching tasks in your list:
 
 Duke saves the data entered into a text file every time the tasklist is updated. It will also load the saved data every time the application is launched.
 
-The application stores the data in the following format:
+The application stores the data in the following format in a .txt file:
 ```
 [T][✘]  read book
 [D][✘]  submit homework (by: 5pm)

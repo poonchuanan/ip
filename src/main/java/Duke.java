@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class Duke {
     public static ArrayList<Task> items = new ArrayList<>();
-    public static int itemsCount = 0;
+    //public static int itemsCount = 0;
 
     /**
      * Checks if string passed is of single word
@@ -68,9 +68,10 @@ public class Duke {
             } else if (input.contains("delete")) {
                 try {
                     int taskNumber = Integer.parseInt(input.replaceAll("[^0-9]", ""));
-
                     System.out.println("Noted. I've removed this task: " + items.get(taskNumber - 1));
                     items.remove(items.get(taskNumber - 1));
+                    System.out.println("Now you have " + items.size() + " task(s) in the list.");
+                    Save.saveData();
                     input = in.nextLine();
                 } catch (NumberFormatException e) {
                     System.out.println("Task number cannot be empty");
@@ -124,7 +125,6 @@ public class Duke {
                     input = in.nextLine();
                     continue;
                 }
-                itemsCount++;
                 Save.saveData();
                 System.out.println("Now you have " + items.size() + " task(s) in the list.");
                 input = in.nextLine();

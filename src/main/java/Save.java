@@ -65,7 +65,7 @@ public class Save {
             if (symbol.equals("\u2713")) {
                 Duke.items.get(Duke.items.size()-1).markAsDone();
             }
-            Duke.itemsCount++;
+            //Duke.itemsCount++;
         }
     }
 
