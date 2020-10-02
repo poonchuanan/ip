@@ -56,6 +56,7 @@ public class Save {
                 description = description.substring(0,indexDividerDeadline);
                 Deadline d = new Deadline(description, deadline);
                 Duke.items[Duke.itemsCount] = d;
+                break;
             }
             if (symbol.equals("\u2713")) {
                 Duke.items[Duke.itemsCount].markAsDone();
