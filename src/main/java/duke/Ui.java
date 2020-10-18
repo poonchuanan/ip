@@ -3,7 +3,7 @@ package duke;
 import java.util.Scanner;
 
 /**
- * Deals with interaction with the user
+ * This class deals with the user's interface.
  */
 public class Ui {
     private Scanner in;
@@ -11,48 +11,60 @@ public class Ui {
     /**
      * Creates a new instance of scanner
      *
-     * returns userInput
      */
     public Ui() {
         this.in = new Scanner(System.in);
     }
+
     /**
      * Reads the user input
      *
-     * @return user input
      */
     public String readCommand(){
         return in.nextLine();
     }
 
     /**
-     * Prints border around the text.
+     * Prints top and bottom border around text.
      *
-     * @param displayText text to be displayed to the user
+     * @param message text to be displayed to the user
      */
-    public void printBorder(String displayText) {
-        String line = "____________________________________________________________\n";
-        System.out.print(line + displayText + line);
+    public void printBorder(String message) {
+        String line = "------------------------------------------------------------\n";
+        System.out.print(line + message + line);
     }
 
     /**
-     * prints greeting message.
+     * Prints greeting message.
      */
-    public void printGreeting() {
-        String welcomeMessage = "Hello! I'm Duke\nWhat can I do for you?\n";
+    public void printWelcome() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        String welcomeMessage = "Hello from\n" + logo + "Hello! I'm Duke\nWhat can I do for you?\n";
         printBorder(welcomeMessage);
     }
 
     /**
-     * prints exit message.
+     * Prints exit message.
      */
-    public void printExit() {
+    public void printBye() {
         String exitMessage = "Bye. Hope to see you again soon!\n";
         printBorder(exitMessage);
     }
 
     /**
-     * Tells the user that a number is to be expected.
+     * Prints message for index out of bounds.
+     */
+    public void printIndexError() {
+        String invalidNumber = "Please enter the correct range!\n";
+        printBorder(invalidNumber);
+    }
+
+    /**
+     * Prints message asking for valid index.
      *
      * @param Argument the argument that causes the error
      */
@@ -60,21 +72,4 @@ public class Ui {
         String invalidNumber = Argument + " is not a valid number!\n";
         printBorder(invalidNumber);
     }
-
-    /**
-     * Tells the user that a valid number in range is to be expected.
-     */
-    public void printIndexError() {
-        String invalidNumber = "Please enter a number in range!\n";
-        printBorder(invalidNumber);
-    }
-
-    /**
-     * Tells the user that the Object is empty
-     */
-    public void printNullError() {
-        String nullErrorMessage = "Object is empty!\n";
-        printBorder(nullErrorMessage);
-    }
-
 }

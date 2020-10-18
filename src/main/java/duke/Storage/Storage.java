@@ -1,6 +1,11 @@
+package duke.Storage;
+
 import duke.Duke;
 import duke.DukeException;
 import duke.Task.Task;
+import duke.Task.Todo;
+import duke.Task.Event;
+import duke.Task.Deadline;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -9,113 +14,92 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
- * Handles the file in hard drive that is needed for storage
+ * Handles data storage of task list
  */
 public class Storage {
-    private String filePath;
-    private File storageText;
+    public static String projectRoot = System.getProperty("user.dir");
+    public static String itemsPath = projectRoot + "/data/duke.txt";
 
     /**
-     * Creates a reference to the file in the filepath
-     *
-     * @param filePath path of storage file in hard drive
+     * Creates new file "data.txt" in data folder
+     * @throws IOException On input error.
      */
-    public Storage(String filePath) {
-        this.filePath = filePath;
-        this.storageText = new File(filePath);
+    public void createFile() throws IOException {
+        File folder = new File("data");
+        // create a folder in your current work space
+        folder.mkdir();
+        // put the file inside the folder
+        File file = new File(folder, "duke.txt");
+        file.createNewFile(); // create the file
     }
 
     /**
-     * Attempts to find file in the hard drive
-     *
-     * @return reference to the file
+     * Loads task list from duke.txt everytime program is run
+     * @throws FileNotFoundException If file does not exist in the first place.
      */
-    public File findFile() {
-        if (!storageText.exists()) {
-            storageText = createFile();
-        }
-        return storageText;
-
-    }
-
-    /**
-     * creates a new file and a directory if file does not
-     * exist in the directory or the directory does not exist
-     *
-     * @return reference to the file
-     */
-    public File createFile() {
-        try {
-            if (!storageText.getParentFile().exists()) {
-                storageText.getParentFile().mkdirs();
+    public void loadData() throws IOException, DukeException {
+        // create a File for the given file path
+        File f = new File(itemsPath);
+        // create a Scanner using the File as the source
+        Scanner s = new Scanner(f);
+        while (s.hasNext()) {
+            String line = s.nextLine();
+            String eventType = line.substring(1, 2);
+            String symbol = line.substring(4, 5);
+            String description = line.substring(7);
+            switch (eventType) {
+            case "T":
+                Todo t = new Todo(description);
+                Duke.getTaskList().addTask(t,false);
+                break;
+            case "E":
+                int indexDividerEvent = description.indexOf("(at:");
+                String eventTime = description.substring(indexDividerEvent+4).replace(")","");
+                description = description.substring(0,indexDividerEvent);
+                Event e = new Event(description, eventTime);
+                Duke.getTaskList().addTask(e,false);
+                break;
+            case "D":
+                int indexDividerDeadline = description.indexOf("(by:");
+                String deadline = description.substring(indexDividerDeadline+4).replace(")","");
+                description = description.substring(0,indexDividerDeadline);
+                Deadline d = new Deadline(description, deadline);
+                Duke.getTaskList().addTask(d,false);
+                break;
             }
-            storageText.createNewFile();
-        } catch (IOException e) {
-            Duke.getUi().printBorder("Unable to create file...\n");
-        }
-        return storageText;
-    }
-
-    /**
-     * Attempts to load data from the storage file
-     * into the program
-     */
-    public void loadFile() {
-        File storage = findFile();
-        Scanner storageData;
-
-        try {
-            storageData = new Scanner(storage);
-            while (storageData.hasNext()) {
-                String data = storageData.nextLine();
-                new ExtractableData(data).ExtractData();
+            if (symbol.equals("\u2713")) {
+                Duke.getTaskList().getTask(Duke.getTaskList().getSize() - 1).markAsDone();
             }
-        } catch (FileNotFoundException e) {
-            Duke.getUi().printBorder("Error has occurred! File not found!\n");
-            return;
-        } catch (DukeException e) {
-            //DukeException has its own error message
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("Invalid number of Arguments");
         }
     }
 
     /**
-     * Saves any task that has been added into the hard drive
-     *
-     * @param item task item that had been added into the list
+     * Saves task list to duke.txt everytime it is modified
+     * @throws IOException
      */
-    public void saveData(Task item) {
-        try {
-            FileWriter appendWrite = new FileWriter(filePath, true);
-            String data =  new CompilableData(item).CompileData();
-            appendWrite.write(data);
-            appendWrite.close();
-        } catch (IOException e) {
-            Duke.getUi().printBorder("Unable to Save!");
-        } catch (DukeException e) {
-            //DukeException has its own error message
-        }
-    }
-
-    /**
-     * Overwrites the data in storage file with the data currently in the program
-     */
-    public void writeFile() {
-        try {
-            FileWriter overWrite = new FileWriter(filePath, false);
-            String data = "";
-            for (int i = 0; i < Duke.getTaskList().getSize(); i++) {
-                Task item = Duke.getTaskList().getTask(i);
-                data += new CompilableData(item).CompileData();
+    public static void saveData() throws IOException {
+        String textToAdd = "";
+        for (int i = 0; i < Duke.getTaskList().getSize(); i++) {
+            Task item = Duke.getTaskList().getTask(i);
+            if(item == null){
+                break;
             }
-            overWrite.write(data);
-            overWrite.close();
-        } catch (IOException e) {
-            Duke.getUi().printBorder("Unable to Save!");
-        } catch (DukeException e) {
-            //DukeException has its own error message
+            textToAdd += item.toString() + System.lineSeparator();
         }
+        writeToFile(itemsPath, textToAdd);
     }
 
+    /**
+     * Writes task list contents to duke.txt
+     * @param filePath Absolute path of the file to be written
+     * @param textToAdd Contents to be written
+     * @throws IOException On input error.
+     */
+    private static void writeToFile(String filePath, String textToAdd) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        fw.write(textToAdd);
+        fw.close();
+    }
 }
+
+
