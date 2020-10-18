@@ -1,3 +1,5 @@
+import Task.Task;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
@@ -59,7 +61,7 @@ public class Duke {
                     System.out.println("[" + items.get(taskNumber - 1).getStatusIcon() + "] " + items.get(taskNumber - 1).description);
                     input = in.nextLine();
                 } catch (NumberFormatException e) {
-                    System.out.println("Task number cannot be empty");
+                    System.out.println("Task.Task number cannot be empty");
                     input = in.nextLine();
                 } catch (NullPointerException e) {
                     System.out.println("Please input a valid number");
@@ -74,7 +76,7 @@ public class Duke {
                     Save.saveData();
                     input = in.nextLine();
                 } catch (NumberFormatException e) {
-                    System.out.println("Task number cannot be empty");
+                    System.out.println("Task.Task number cannot be empty");
                     input = in.nextLine();
                 } catch (NullPointerException e) {
                     System.out.println("Please input a valid number");

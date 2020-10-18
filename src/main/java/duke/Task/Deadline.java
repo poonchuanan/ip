@@ -1,8 +1,10 @@
+package Task;
+
 public class Deadline extends Task {
     protected String by;
 
     /**
-     * Represents the properties of Deadline task.
+     * Represents the properties of Task.Deadline task.
      */
     public Deadline(String description, String by) {
         super(description);

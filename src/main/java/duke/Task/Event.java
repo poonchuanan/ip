@@ -1,8 +1,10 @@
+package Task;
+
 public class Event extends Task{
     protected String at;
 
     /**
-     * Represents the properties of Event task.
+     * Represents the properties of Task.Event task.
      */
     public Event(String description, String at) {
         super(description);

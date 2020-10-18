@@ -1,9 +1,11 @@
+package Task;
+
 /**
- * Represents the properties of Todo task.
+ * Represents the properties of Task.Todo task.
  */
 public class Todo extends Task {
     /**
-     * Stores details of Todo
+     * Stores details of Task.Todo
      * @param description description of task
      */
     public Todo(String description) {
@@ -11,7 +13,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Stores details of Todo
+     * Stores details of Task.Todo
      *
      * @return full details of task -  todo type, completion status and description
      */
