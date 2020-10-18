@@ -1,11 +1,11 @@
-# duke.Duke User Guide
+# Duke User Guide
 duke.Duke is an application that keeps track of your completion of daily tasks such as things to do, deadlines and events. 
 
 - [Quick start](#quick-start) 
 - [Features](#features)
-    - [Adding a duke.Task.Todo task : ``` todo ```](#adding-a-todo-task-todo)
-    - [Adding a duke.Task.Deadline task : ``` deadline ```](#adding-a-deadline-task-deadline)
-    - [Adding an duke.Task.Event task : ``` event ```](#adding-an-event-task-event)
+    - [Adding a Todo task : ``` todo ```](#adding-a-todo-task-todo)
+    - [Adding a Deadline task : ``` deadline ```](#adding-a-deadline-task-deadline)
+    - [Adding an Event task : ``` event ```](#adding-an-event-task-event)
     - [Listing of all tasks: ``` list ```](#listing-of-all-tasks-list)
     - [Marking task as done ``` done ```](#marking-task-as-done-done)
     - [Deleting a task: ``` delete ```](#deleting-a-task-delete)
@@ -16,15 +16,15 @@ duke.Duke is an application that keeps track of your completion of daily tasks s
 
 ### Quick Start
 1. Download Java 11 on your computer.
-2. Download the latest version of duke.Duke.jar from github.
-3. duke.duke.Storage.Storage.Save the file into a folder to run the program from.
-4. Use the command line navigate to the directory of where duke.Duke.jar is in.
-5. Run the command java -jar duke.Duke.jar.
+2. Download the latest version of Duke.jar from github.
+3. Save the file into a folder to run the program from.
+4. Use the command line navigate to the directory of where Duke.jar is in.
+5. Run the command java -jar Duke.jar.
 6. The application will then start running.
 
 ## Features 
 
-## Adding a duke.Task.Todo task: ``` todo ``` 
+## Adding a Todo task: ``` todo ``` 
 This command adds a todo task to the tasklist.
 
 Format: ```todo DESCRIPTION_OF_TASK```
@@ -37,7 +37,7 @@ Got it. I've added this task:
 [T][✘]  read book
 Now you have 1 task(s) in the list.
 ```
-## Adding a duke.Task.Deadline task: ``` deadline ```
+## Adding a Deadline task: ``` deadline ```
 This command adds a deadline task to the tasklist.
 
 Format: ```deadline DESCRIPTION_OF_TASK /by DEADLINE```
@@ -50,7 +50,7 @@ Got it. I've added this task:
 [D][✘]  submit homework (by: 5pm)
 Now you have 2 task(s) in the list.
 ```
-## Adding an duke.Task.Event task: ``` event ```
+## Adding an Event task: ``` event ```
 This command adds an event to the tasklist.
 
 Format: ```event DESCRIPTION_OF_TASK /at EVENT_DATE```
@@ -117,7 +117,7 @@ Here are the matching tasks in your list:
 ```
 ## Saving data 
 
-duke.Duke saves the data entered into a text file every time the tasklist is updated. It will also load the saved data every time the application is launched.
+Duke saves the data entered into a text file every time the tasklist is updated. It will also load the saved data every time the application is launched.
 
 The application stores the data in the following format in a .txt file:
 ```
@@ -137,13 +137,13 @@ Example outcome:
 Bye. Hope to see you again soon!
 ```
 ### Tasks legend
-- T: Represents a duke.Task.Todo task
-- D: Represents a duke.Task.Deadline task 
-- E: Represents an duke.Task.Event task
+- T: Represents a Todo task
+- D: Represents a Deadline task 
+- E: Represents an Event task
 
-### duke.Task.duke.Task completion legend
-- ✓: duke.Task.duke.Task is done
-- ✘: duke.Task.duke.Task is not completed
+### Task completion legend
+- ✓: Task is done
+- ✘: Task is not completed
 
 ## Command Summary
 
